@@ -2,6 +2,8 @@
 # RC Script for Tiny Core Linux
 # (c) Robert Shingledecker 2004-2012
 # Several modifications for speed by Curaga
+# Several modifications for slowness by Misalf...
+# + Set alternate font (e.g. Terminus) for console (setconmap.sh).
 . /etc/init.d/tc-functions
 useBusybox
 
@@ -24,6 +26,8 @@ addUser(){
 ### END functions
 
 # Main
+
+[ -x /usr/local/bin/setconmap.sh ] && /usr/local/bin/setconmap.sh
 
 echo "${GREEN}Booting ${YELLOW}Core $VERSION ${NORMAL}"
 echo "${GREEN}Running Linux Kernel ${YELLOW}$KERNEL${GREEN}.${NORMAL}"
@@ -573,6 +577,8 @@ else
 		echo -n "${RED}Press Enter key.${NORMAL}"; read ans
 	fi
 fi
+
+[ -x /usr/local/bin/setconmap.sh ] && /usr/local/bin/setconmap.sh
 
 [ -n "$KEYMAP" ] || KEYMAP="us"
 if [ -f "/usr/share/kmap/$KEYMAP.kmap" ]; then
